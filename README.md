@@ -76,13 +76,14 @@ Implement onConfigurationChanged method in MainActivity.java
         KeyEventModule.getInstance().onKeyDownEvent(keyCode);
 
         // There are 2 ways this can be done:
-        //  1.  Override all default keyboard event actions
+        //  1.  Override the default keyboard event behavior
         //    super.onKeyDown(keyCode, event);
         //    return true; // Override default keyboard events
 
-        //  2.  Keep default keyboard event actions
+        //  2.  Keep default keyboard event behavior
         //    return super.onKeyDown(keyCode, event);
 
+        // Using method #1
         super.onKeyDown(keyCode, event);
         return true; // Override default keyboard events
       }
