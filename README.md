@@ -67,7 +67,9 @@ Run `npm install react-native-keyevent --save`
 Implement onConfigurationChanged method in MainActivity.java
 
 ```
+    import android.view.KeyEvent; // <--- import
     import com.github.kevinejohn.keyevent.KeyEventModule; // <--- import
+    
 
     public class MainActivity extends ReactActivity {
       ......
