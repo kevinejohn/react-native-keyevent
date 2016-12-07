@@ -30,6 +30,13 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
         mJSModule.emit("onKeyDown", keyCode);
     };
 
+    public void onKeyUpEvent(int keyCode) {
+        if (mJSModule == null) {
+            mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+        }
+        mJSModule.emit("onKeyUp", keyCode);
+    };
+
     protected KeyEventModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
