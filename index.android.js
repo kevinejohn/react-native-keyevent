@@ -1,27 +1,29 @@
 import { DeviceEventEmitter } from 'react-native';
 
 class KeyEvent {
-  static onKeyDownListener(cb) {
-    KeyEvent.removeKeyDownListener();
+  onKeyDownListener(cb) {
+    this.removeKeyDownListener();
     this.listenerKeyDown = DeviceEventEmitter.addListener('onKeyDown', cb);
   }
 
-  static removeKeyDownListener() {
+  removeKeyDownListener() {
     if (this.listenerKeyDown) {
       this.listenerKeyDown.remove();
+      this.listenerKeyDown = null;
     }
   }
 
-  static onKeyUpListener(cb) {
-    KeyEvent.removeKeyUpListener();
+  onKeyUpListener(cb) {
+    this.removeKeyUpListener();
     this.listenerKeyUp = DeviceEventEmitter.addListener('onKeyUp', cb);
   }
 
-  static removeKeyUpListener() {
+  removeKeyUpListener() {
     if (this.listenerKeyUp) {
       this.listenerKeyUp.remove();
+      this.listenerKeyUp = null;
     }
   }
 }
 
-export default KeyEvent;
+export default new KeyEvent();
