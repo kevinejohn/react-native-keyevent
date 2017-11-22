@@ -121,6 +121,11 @@ Implement onConfigurationChanged method in MainActivity.java
         return true;
       }
 
+      @Override
+      public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
+          KeyEventModule.getInstance().onKeyMultipleEvent(keyCode, repeatCount, event);
+          return super.onKeyMultiple(keyCode, repeatCount, event);
+      }
       ......
 
     }
