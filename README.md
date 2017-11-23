@@ -69,7 +69,7 @@ Implement onConfigurationChanged method in MainActivity.java
 ```
     import android.view.KeyEvent; // <--- import
     import com.github.kevinejohn.keyevent.KeyEventModule; // <--- import
-    
+
 
     public class MainActivity extends ReactActivity {
       ......
@@ -140,13 +140,22 @@ Whenever you want to use it within React Native code now you can:
 ```javascript
   componentDidMount() {
     // if you want to react to keyDown
-    KeyEvent.onKeyDownListener((keyCode) => {
-      console.log(`Key code pressed: ${keyCode}`);
+    KeyEvent.onKeyDownListener((keyEvent) => {
+      console.log(`Key code pressed: ${keyEvent.keyCode}`);
+      console.log(`Action: ${keyEvent.action}`);
     });
 
     // if you want to react to keyUp
-    KeyEvent.onKeyUpListener((keyCode) => {
-      console.log(`Key code pressed: ${keyCode}`);
+    KeyEvent.onKeyUpListener((keyEvent) => {
+      console.log(`Key code pressed: ${keyEvent.keyCode}`);
+      console.log(`Action: ${keyEvent.action}`);
+    });
+
+    // if you want to react to keyMultiple
+    KeyEvent.onKeyMultipleListener((keyEvent) => {
+      console.log(`Key code pressed: ${keyEvent.keyCode}`);
+      console.log(`Action: ${keyEvent.action}`);
+      console.log(`Characters: ${keyEvent.characters}`);
     });
   }
 
@@ -156,6 +165,9 @@ Whenever you want to use it within React Native code now you can:
 
      // if you are listening to keyUp
     KeyEvent.removeKeyUpListener();
+
+     // if you are listening to keyMultiple
+    KeyEvent.removeKeyMultipleListener();
   }
 ```
 
