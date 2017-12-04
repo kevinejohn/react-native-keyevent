@@ -1,4 +1,7 @@
-## react-native-keyevent
+# React Native KeyEvent
+
+[![npm version](https://badge.fury.io/js/react-native-keyevent.svg)](http://badge.fury.io/js/react-native-keyevent)
+
 Capture external keyboard keys or remote control button events
 
 [Learn about Android KeyEvent here](https://developer.android.com/reference/android/view/KeyEvent.html).
