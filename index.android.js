@@ -24,6 +24,18 @@ class KeyEvent {
       this.listenerKeyUp = null;
     }
   }
+
+  onKeyMultipleListener(cb) {
+    this.removeKeyMultipleListener();
+    this.listenerKeyMultiple = DeviceEventEmitter.addListener('onKeyMultiple', cb);
+  }
+
+  removeKeyMultipleListener() {
+    if (this.listenerKeyMultiple) {
+      this.listenerKeyMultiple.remove();
+      this.listenerKeyMultiple = null;
+    }
+  }
 }
 
 export default new KeyEvent();

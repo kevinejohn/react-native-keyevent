@@ -4,6 +4,10 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.bridge.WritableMap;
+
+import android.view.KeyEvent;
 
 /**
  * Created by Kevin Johnson on 8/15/16.
@@ -23,23 +27,53 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
         return instance;
     }
 
-    public void onKeyDownEvent(int keyCode) {
+    public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
-        mJSModule.emit("onKeyDown", keyCode);
+        mJSModule.emit("onKeyDown", getJsEventParams(keyCode, keyEvent, null));
     };
 
-    public void onKeyUpEvent(int keyCode) {
+    public void onKeyUpEvent(int keyCode, KeyEvent keyEvent) {
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
-        mJSModule.emit("onKeyUp", keyCode);
+        mJSModule.emit("onKeyUp", getJsEventParams(keyCode, keyEvent, null));
+    };
+
+    public void onKeyMultipleEvent(int keyCode, int repeatCount, KeyEvent keyEvent) {
+        if (mJSModule == null) {
+            mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+        }
+
+
+        mJSModule.emit("onKeyMultiple", getJsEventParams(keyCode, keyEvent, repeatCount));
     };
 
     protected KeyEventModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
+    }
+
+    private WritableMap getJsEventParams(int keyCode, KeyEvent keyEvent, Integer repeatCount) {
+        WritableMap params = new WritableNativeMap();
+        int action = keyEvent.getAction();
+
+        if (keyEvent.getAction() == KeyEvent.ACTION_MULTIPLE && keyCode == KeyEvent.KEYCODE_UNKNOWN) {
+            String chars = keyEvent.getCharacters();
+            if (chars != null) {
+                params.putString("characters", chars);
+            }
+        }
+
+        if (repeatCount != null) {
+            params.putInt("repeatcount", repeatCount);
+        }
+
+        params.putInt("keyCode", keyCode);
+        params.putInt("action", action);
+
+        return params;
     }
 
     @Override
