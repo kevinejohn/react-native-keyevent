@@ -58,6 +58,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
     private WritableMap getJsEventParams(int keyCode, KeyEvent keyEvent, Integer repeatCount) {
         WritableMap params = new WritableNativeMap();
         int action = keyEvent.getAction();
+        char pressedKey = (char) keyEvent.getUnicodeChar();
 
         if (keyEvent.getAction() == KeyEvent.ACTION_MULTIPLE && keyCode == KeyEvent.KEYCODE_UNKNOWN) {
             String chars = keyEvent.getCharacters();
@@ -72,6 +73,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
 
         params.putInt("keyCode", keyCode);
         params.putInt("action", action);
+        params.putString("pressedKey", String.valueOf(pressedKey));
 
         return params;
     }
