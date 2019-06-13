@@ -227,4 +227,4 @@ Whenever you want to use it within React Native code now you can:
 
 - [x] iOS Support
 - [ ] Add iOS Support for keyDown and multipleKeys
-- [ ] Implement `keyCode` and `action`
+- [ ] Implement `keyCode` and `action` on iOS
