@@ -63,6 +63,10 @@ Run `npm install react-native-keyevent --save`
     }
     ```
 
+**iOS**
+
+Follow the instrutions listed here: [Manually Linking iOS](https://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking).
+
 ### Configuration
 
 #### Android
@@ -134,6 +138,49 @@ Implement onConfigurationChanged method in MainActivity.java
     }
 ```
 
+#### iOS
+
+This will need to be added in your `AppDelegate.m` file:
+
+```objc
+// react-native-keyevent
+#import "RNKeyEvent.h"  // import our package after linking
+
+@implementation AppDelegate
+
+//....
+
+/*!
+ * react-native-keyevent support
+ */
+RNKeyEvent *keyEvent = nil;
+
+- (NSMutableArray<UIKeyCommand *> *)keyCommands {
+  NSMutableArray *keys = [NSMutableArray new];
+  
+  if (keyEvent == nil) {
+    keyEvent = [[RNKeyEvent alloc] init];
+  }
+  
+  if ([keyEvent isListening]) {
+    NSArray *namesArray = [[keyEvent getKeys] componentsSeparatedByString:@","];
+    
+    for (NSString* names in namesArray) {
+      [keys addObject: [UIKeyCommand keyCommandWithInput:names modifierFlags:0 action:@selector(keyInput:)]];
+    }
+  }
+  
+  return keys;
+}
+
+- (void)keyInput:(UIKeyCommand *)sender {
+  NSString *selected = sender.input;
+  [keyEvent sendKeyEvent:selected];
+}
+
+@end
+```
+
 ## Usage
 
 Whenever you want to use it within React Native code now you can:
@@ -146,12 +193,14 @@ Whenever you want to use it within React Native code now you can:
     KeyEvent.onKeyDownListener((keyEvent) => {
       console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
       console.log(`Action: ${keyEvent.action}`);
+      console.log(`Key: ${keyEvent.pressedKey}`);
     });
 
     // if you want to react to keyUp
     KeyEvent.onKeyUpListener((keyEvent) => {
       console.log(`onKeyUp keyCode: ${keyEvent.keyCode}`);
       console.log(`Action: ${keyEvent.action}`);
+      console.log(`Key: ${keyEvent.pressedKey}`);
     });
 
     // if you want to react to keyMultiple
@@ -176,4 +225,6 @@ Whenever you want to use it within React Native code now you can:
 
 ## TODOS
 
-- [ ] iOS Support
+- [x] iOS Support
+- [ ] Add iOS Support for keyDown and multipleKeys
+- [ ] Implement `keyCode` and `action` on iOS
