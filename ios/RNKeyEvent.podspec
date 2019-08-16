@@ -2,11 +2,11 @@
 Pod::Spec.new do |s|
   s.name         = "RNKeyEvent"
   s.version      = "1.0.0"
-  s.summary      = "RNKeyEvent"
+  s.summary      = "Listen to keyboard events"
   s.description  = <<-DESC
                   RNKeyEvent
                    DESC
-  s.homepage     = ""
+  s.homepage     = "https://github.com/kevinejohn/react-native-keyevent"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
