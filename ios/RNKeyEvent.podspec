@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNKeyEvent"
-  s.version      = "1.0.0"
+  s.version      = "0.2.1"
   s.summary      = "Listen to keyboard events"
   s.description  = <<-DESC
                   RNKeyEvent
