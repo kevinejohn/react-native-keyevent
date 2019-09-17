@@ -13,6 +13,10 @@ Capture external keyboard keys or remote control button events
 
 Run `npm install react-native-keyevent --save`
 
+#### via yarn
+
+Run `yarn add react-native-keyevent`
+
 ### Linking (Android)
 
 `react-native link react-native-keyevent`
