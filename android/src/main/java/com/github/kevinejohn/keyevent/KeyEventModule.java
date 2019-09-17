@@ -28,6 +28,10 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
     }
 
     public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
+        if (!mReactContext.hasActiveCatalystInstance()) {
+            return;
+        }
+
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
@@ -35,6 +39,10 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
     };
 
     public void onKeyUpEvent(int keyCode, KeyEvent keyEvent) {
+        if (!mReactContext.hasActiveCatalystInstance()) {
+            return;
+        }
+
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
@@ -42,6 +50,10 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
     };
 
     public void onKeyMultipleEvent(int keyCode, int repeatCount, KeyEvent keyEvent) {
+        if (!mReactContext.hasActiveCatalystInstance()) {
+            return;
+        }
+        
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
