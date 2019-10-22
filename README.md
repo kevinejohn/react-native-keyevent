@@ -169,8 +169,16 @@ RNKeyEvent *keyEvent = nil;
   if ([keyEvent isListening]) {
     NSArray *namesArray = [[keyEvent getKeys] componentsSeparatedByString:@","];
     
+    NSCharacterSet *validChars = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    
     for (NSString* names in namesArray) {
-      [keys addObject: [UIKeyCommand keyCommandWithInput:names modifierFlags:0 action:@selector(keyInput:)]];
+      NSRange  range = [names rangeOfCharacterFromSet:validChars];
+      
+      if (NSNotFound != range.location) {
+        [keys addObject: [UIKeyCommand keyCommandWithInput:names modifierFlags:UIKeyModifierShift action:@selector(keyInput:)]];
+      } else {
+        [keys addObject: [UIKeyCommand keyCommandWithInput:names modifierFlags:0 action:@selector(keyInput:)]];
+      }
     }
   }
   
