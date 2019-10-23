@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
-  s.platform     = :ios, "7.0"
+  s.platforms      = { :ios => "7.0", :tvos => "11.0" }
   s.source       = { :git => "https://github.com/author/RNKeyEvent.git", :tag => "master" }
   s.source_files  = "RNKeyEvent/**/*.{h,m}"
   s.requires_arc = true
