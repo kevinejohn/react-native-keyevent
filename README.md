@@ -19,11 +19,11 @@ Run `yarn add react-native-keyevent`
 
 ### Linking
 
-####Android:
+#### Android:
 
 `react-native link react-native-keyevent` (for React Native <= 0.59 only)
 
-####iOS: 
+#### iOS: 
 
  `pod install`  inside your `ios` folder.
 
