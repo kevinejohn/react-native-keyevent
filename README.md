@@ -17,9 +17,15 @@ Run `npm install react-native-keyevent --save`
 
 Run `yarn add react-native-keyevent`
 
-### Linking (Android)
+### Linking
 
-`react-native link react-native-keyevent`
+####Android:
+
+`react-native link react-native-keyevent` (for React Native <= 0.59 only)
+
+####iOS: 
+
+ `pod install`  inside your `ios` folder.
 
 > Note: You still must manually register module in MainActivity! (Instructions below under Configuration Android)
 
@@ -148,7 +154,7 @@ This will need to be added in your `AppDelegate.m` file:
 
 ```objc
 // react-native-keyevent
-#import "RNKeyEvent.h"  // import our package after linking
+#import <RNKeyEvent.h>  // import our package after linking
 
 @implementation AppDelegate
 
