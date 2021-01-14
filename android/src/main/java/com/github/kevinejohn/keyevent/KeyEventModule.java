@@ -79,6 +79,11 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             }
         }
 
+        if (keyEvent.getAction() == KeyEvent.ACTION_DOWN || keyEvent.getAction() == KeyEvent.ACTION_UP) {
+            char character = (char) keyEvent.getUnicodeChar();
+            params.putString("character", Character.toString(character));
+        }
+
         if (repeatCount != null) {
             params.putInt("repeatcount", repeatCount);
         }

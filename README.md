@@ -212,6 +212,7 @@ Whenever you want to use it within React Native code now you can:
       console.log(`onKeyDown keyCode: ${keyEvent.keyCode}`);
       console.log(`Action: ${keyEvent.action}`);
       console.log(`Key: ${keyEvent.pressedKey}`);
+      console.log(`Character: ${keyEvent.character}`); // android only
     });
 
     // if you want to react to keyUp
@@ -219,13 +220,14 @@ Whenever you want to use it within React Native code now you can:
       console.log(`onKeyUp keyCode: ${keyEvent.keyCode}`);
       console.log(`Action: ${keyEvent.action}`);
       console.log(`Key: ${keyEvent.pressedKey}`);
+      console.log(`Character: ${keyEvent.character}`); // android only
     });
 
     // if you want to react to keyMultiple
     KeyEvent.onKeyMultipleListener((keyEvent) => {
       console.log(`onKeyMultiple keyCode: ${keyEvent.keyCode}`);
       console.log(`Action: ${keyEvent.action}`);
-      console.log(`Characters: ${keyEvent.characters}`);
+      console.log(`Characters: ${keyEvent.characters}`); // android only
     });
   }
 
