@@ -1,6 +1,6 @@
 {
   "name": "react-native-keyevent",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Capture external keyboard keys or remote control button events",
   "types": "index.d.ts",
   "keywords": [
