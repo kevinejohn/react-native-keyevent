@@ -36,7 +36,7 @@ Run `yarn add react-native-keyevent`
 
 1. In `android/setting.gradle`
 
-    ```
+    ```gradle
     ...
     include ':react-native-keyevent'
     project(':react-native-keyevent').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-keyevent/android')
@@ -44,7 +44,7 @@ Run `yarn add react-native-keyevent`
 
 2. In `android/app/build.gradle`
 
-    ```
+    ```gradle
     ...
     dependencies {
         ...
@@ -54,7 +54,7 @@ Run `yarn add react-native-keyevent`
 
 3. Register module (in MainApplication.java)
 
-    ```
+    ``` java
     import com.github.kevinejohn.keyevent.KeyEventPackage;  // <--- import
 
     public class MainApplication extends Application implements ReactApplication {
@@ -81,9 +81,88 @@ Follow the instrutions listed here: [Manually Linking iOS](https://facebook.gith
 
 #### Android
 
+<details>
+<summary>RN version >= 0.73.0</summary>
+<br>
+Implement these methods in MainActivity.kt
+
+```kotlin
+    import android.view.KeyEvent; // <--- import
+    import com.github.kevinejohn.keyevent.KeyEventModule; // <--- import
+
+
+    class MainActivity : ReactActivity() {
+      ......
+       //  Add this method if you want to react to keyDown
+      override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        // A. Prevent multiple events on long button press
+        //    In the default behavior multiple events are fired if a button
+        //    is pressed for a while. You can prevent this behavior if you
+        //    forward only the first event:
+        //        if (event.getRepeatCount() == 0) {
+        //            KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
+        //        }
+        //
+        // B. If multiple Events shall be fired when the button is pressed
+        //    for a while use this code:
+        //        KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
+        //
+        // Using B.
+        KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
+
+        // There are 2 ways this can be done:
+        //  1.  Override the default keyboard event behavior
+        //    super.onKeyDown(keyCode, event);
+        //    return true;
+
+        //  2.  Keep default keyboard event behavior
+        //    return super.onKeyDown(keyCode, event);
+
+        // Using method #1 without blocking multiple
+        super.onKeyDown(keyCode, event)
+        return true
+
+        // Using method #2
+        return super.onKeyDown(keyCode, event);
+      }
+
+      // Add this method if you want to react to keyUp
+      override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        KeyEventModule.getInstance().onKeyUpEvent(keyCode, event);
+
+        // There are 2 ways this can be done:
+        //  1.  Override the default keyboard event behavior
+        //    super.onKeyUp(keyCode, event)
+        //    return true
+
+        //  2.  Keep default keyboard event behavior
+        //    return super.onKeyUp(keyCode, event)
+
+        // Using method #1
+        super.onKeyUp(keyCode, event)
+        return true
+
+        // Using method #2
+        return super.onKeyUp(keyCode, event)
+      }
+
+      override fun onKeyMultiple(keyCode: Int, repeatCount: Int, event: KeyEvent): Boolean {
+          KeyEventModule.getInstance().onKeyMultipleEvent(keyCode, repeatCount, event);
+          return super.onKeyMultiple(keyCode, repeatCount, event);
+      }
+      ......
+
+    }
+```
+</details>
+<br>
+<details>
+<summary>RN version <= 0.72.20</summary>
+<br>
 Implement onConfigurationChanged method in MainActivity.java
 
-```
+```java
     import android.view.KeyEvent; // <--- import
     import com.github.kevinejohn.keyevent.KeyEventModule; // <--- import
 
@@ -147,6 +226,7 @@ Implement onConfigurationChanged method in MainActivity.java
 
     }
 ```
+</details>
 
 #### iOS
 
