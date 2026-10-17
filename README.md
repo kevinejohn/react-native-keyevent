@@ -199,6 +199,16 @@ RNKeyEvent *keyEvent = nil;
 @end
 ```
 
+#### Vega OS (Fire TV)
+
+Nothing to link or configure. On Vega OS the module listens to the remote through `TVEventHandler` from `react-native`, and Metro picks `index.kepler.js` by itself.
+
+- Events have the same fields as on Android, with Android key codes (`KEYCODE_DPAD_RIGHT` = 22, `KEYCODE_MEDIA_PLAY_PAUSE` = 85, …), so code written for Android TV works unchanged. `eventType` adds Vega's own name of the key (`right`, `playpause`, …).
+- Keys without an Android code, and focus events, are not sent.
+- `onKeyMultipleListener` is accepted but never called: Vega reports no repeat count.
+
+Checked on a Fire TV Stick 4K Select (Vega OS 2.0): D-pad and Select give one `onKeyDown` and one `onKeyUp` each.
+
 ## Usage
 
 Whenever you want to use it within React Native code now you can:
@@ -247,3 +257,4 @@ Whenever you want to use it within React Native code now you can:
 - [ ] Add iOS Support for keyDown and multipleKeys
 - [ ] Implement `keyCode` and `action` on iOS
 - [x] Support for TypeScript projects
+- [x] Vega OS (Fire TV) support
