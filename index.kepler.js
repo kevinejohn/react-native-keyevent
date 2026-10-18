@@ -1,8 +1,7 @@
 import { TVEventHandler } from 'react-native';
 
-// Vega OS (Fire TV): the remote's keys come through TVEventHandler, so there is no native
-// module and no MainActivity code to add. Events carry Android key codes, so code written
-// for Android TV works unchanged.
+// Vega OS (Fire TV): keys come from TVEventHandler, so no native module is needed.
+// Events carry Android key codes, so Android TV code works unchanged.
 
 // Vega HWEvent.eventType -> android.view.KeyEvent key code
 const KEY_CODES = {
@@ -62,7 +61,7 @@ class KeyEvent {
     this.setListener('onKeyUp', null);
   }
 
-  // Accepted for the same API, never called: Vega reports no repeat count.
+  // Same API; never called: Vega has no repeat count.
   onKeyMultipleListener(cb) {
     this.setListener('onKeyMultiple', cb);
   }
@@ -97,7 +96,7 @@ class KeyEvent {
     listener({
       keyCode,
       action,
-      // Android sends the key's character: the digit for number keys, '\u0000' for the rest.
+      // Like Android: the digit for number keys, '\u0000' otherwise.
       pressedKey: digit ? digit[1] : '\u0000',
       eventType: event.eventType,
     });

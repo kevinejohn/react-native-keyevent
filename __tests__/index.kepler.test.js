@@ -1,5 +1,4 @@
-// Vega OS: the remote's keys arrive through TVEventHandler from react-native.
-// The fake handler below stands in for it, so the tests run without a device.
+// A fake TVEventHandler stands in for Vega's, so the tests run without a device.
 let mockHandlers = [];
 
 jest.mock(
